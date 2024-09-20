@@ -56,15 +56,41 @@
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button class="btn btn-outline-primary bg-primary" type="submit">Search</button>
             </form>
           </div>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-white" href="#"
+                id="profileDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false"> Angel</a>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Orders</a></li>
+                    <li><a class="dropdown-item" href="#">Change  Password</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+            </li>
+          </ul>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-white" href="#">Cart</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-white" href="#">Wishlist</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-white" href="#">Login</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-white" href="#">Register</a>
+          </li>
         </div>
       </nav>
 
+    {% block banner-slider %}{% endblock banner-slider %}
     {% block main-content %}{% endblock main-content %}
 
-    <footer>
+    <footer class="container-fluid fixed-bottom bg-success text-center p-2 mt-5">
         copyright : 2022 || Developed by Neema Mwende
     </footer>
 
