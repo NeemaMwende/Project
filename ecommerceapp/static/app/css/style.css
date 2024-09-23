@@ -67,7 +67,7 @@
 }
 
 .goodnessseccont img{
-    width:100%;
+    width: 90px;
 }
 
 .mlkpro{
@@ -83,4 +83,36 @@
 
 .goodnesssec a{
     text-decoration: none;
+}
+
+
+/* Adjust image size */
+img {
+    max-width: 100%;  /* Ensures the image does not exceed its container width */
+    height: auto;     /* Maintain aspect ratio while scaling */
+    display: block;   /* Removes any gap beneath the image */
+}
+
+/* Specific class for product images */
+.product-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
+}
+
+/* To limit height of images */
+.goodnessesc img {
+    width: 100%;      /* Fit the container */
+    height: 200px;    /* Sets a fixed height */
+    object-fit: cover; /* Crops the image if necessary while keeping aspect ratio */
+}
+
+.mlkpro {
+    color: #636362;
+    font-size: 18px;  /* Adjusted font size */
+    line-height: 22px;
+    margin-bottom: 10px;
+    width: 70%;       /* Reduced width of text */
+    margin: 0 auto;
+    text-align: center;
 }
