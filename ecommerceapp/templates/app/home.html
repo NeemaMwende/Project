@@ -29,8 +29,106 @@
   </div>
 {% endblock banner-slider %}
 
+{% block information %}
+<div class="container">
+    <div class="row bg-success text-center p-5 text-white border-bottom shadow">
+        <h1>Products</h1>
+        <small class="fs-5">
+            Dolda offers a wide range of products in both liquid Milk
+            and by-product catgories. The liquid milk comprises of 5 types of variants and
+            the by-product comprises of 14 types of variants.
+
+            Dodla offers a wide range of milk products comprising of Fresh Milk,
+            Butter, Ghee, Curd, Flavored milk, Doodh Peda, Ice Cream and Skimmed Milk
+            powder.
+        </small>
+    </div>
+</div> 
+{% endblock information %}
+
 {% block main-content %}
     {% comment %} <h1>Welcome to Diary Products Site .... </h1> {% endcomment %}
+    <div class="container">
+        <h2 class="text-center">Diary Products</h2>
+        <br><br>
+        <div class="row container">
+            <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+              data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+              animation-name: none;">
+              <a href="#">
+                  <div class="goodnessesc buttermilk smbg">
+                      <image src="{% static 'app/images/products/buffalo-ghee.png' %}"
+                      class="img-responsive" alt="">
+                      <p class="mlkpro">GHEE</p>
+                  </div>
+              </a>
+        </div>
+
+        <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+          data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+          animation-name: none;">
+            <a href="#">
+              <div class="goodnessesc buttermilk smbg">
+                  <image src="{% static 'app/images/products/curd-total.png' %}"
+                  class="img-responsive" alt="">
+                  <p class="mlkpro">CURD</p>
+              </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+          data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+          animation-name: none;">
+          <a href="#">
+              <div class="goodnessesc buttermilk smbg">
+                  <image src="{% static 'app/images/products/kulfi.png' %}"
+                  class="img-responsive" alt="">
+                  <p class="mlkpro">KULFI</p>
+              </div>
+          </a>
+      </div>
+
+      <br><br>
+
+        <div class="row container">
+          <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+            data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+            animation-name: none;">
+            <a href="#">
+                <div class="goodnessesc buttermilk smbg">
+                    <image src="{% static 'app/images/products/milk-shake-chocolate.png' %}"
+                    class="img-responsive" alt="">
+                    <p class="mlkpro">Milkshake</p>
+                </div>
+            </a>
+        </div>
+
+      <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+        animation-name: none;">
+          <a href="#">
+            <div class="goodnessesc buttermilk smbg">
+                <image src="{% static 'app/images/products/cow-milk.png' %}"
+                class="img-responsive" alt="">
+                <p class="mlkpro">Milk</p>
+            </div>
+          </a>
+      </div>
+
+      <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+        animation-name: none;">
+        <a href="#">
+            <div class="goodnessesc buttermilk smbg">
+                <image src="{% static 'app/images/products/icbars.png' %}"
+                class="img-responsive" alt="">
+                <p class="mlkpro">Icebar</p>
+            </div>
+        </a>
+      </div>
+
+    </div>
+    <br/><br/>
 {% endblock main-content %}
 
 
