@@ -58,3 +58,9 @@ class CustomerRegistrationView(View):
                 'form': form  # Pass the invalid form back to the template
             }
             return render(request, "app/customerregistration.html", context)
+
+class ProfileView(View):
+    def get(self, request):
+        return render(request, "app/profile.html", locals())
+    def post(self, request):
+        return render(request, "app/profile.html", locals())
