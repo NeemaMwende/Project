@@ -1,6 +1,121 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %} Category {% endblock title %}
+{% block title %} Contact {% endblock title %}
+
+{% block banner-slider %}
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static  "app/images/banner/b1.jpg" %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static  "app/images/banner/b2.jpg" %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static  "app/images/banner/b3.jpg" %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static  "app/images/banner/b4.jpg" %}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+{% endblock banner-slider %}
 
 {% block main-content %}
+<!-- Centering the form and adding a green border with padding -->
+<div class="d-flex justify-content-center mt-5">
+    <div class="p-4 border border-success rounded" style="max-width: 600px;">
+
+        <form class="row g-3">
+            <!-- First Name -->
+            <div class="row mb-3">
+              <label for="validationServer01" class="col-sm-3 col-form-label">First name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm is-valid" id="validationServer01" value="Mark" required>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="row mb-3">
+              <label for="validationServer02" class="col-sm-3 col-form-label">Last name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm is-valid" id="validationServer02" value="Otto" required>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+            </div>
+
+            <!-- Username -->
+            <div class="row mb-3">
+              <label for="validationServerUsername" class="col-sm-3 col-form-label">Username</label>
+              <div class="col-sm-9">
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                  <input type="text" class="form-control form-control-sm is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                  <div id="validationServerUsernameFeedback" class="invalid-feedback">Please choose a username.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- City -->
+            <div class="row mb-3">
+              <label for="validationServer03" class="col-sm-3 col-form-label">City</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                <div id="validationServer03Feedback" class="invalid-feedback">Please provide a valid city.</div>
+              </div>
+            </div>
+
+            <!-- State -->
+            <div class="row mb-3">
+              <label for="validationServer04" class="col-sm-3 col-form-label">State</label>
+              <div class="col-sm-9">
+                <select class="form-select form-select-sm is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option>...</option>
+                </select>
+                <div id="validationServer04Feedback" class="invalid-feedback">Please select a valid state.</div>
+              </div>
+            </div>
+
+            <!-- Zip -->
+            <div class="row mb-3">
+              <label for="validationServer05" class="col-sm-3 col-form-label">Zip</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+                <div id="validationServer05Feedback" class="invalid-feedback">Please provide a valid zip.</div>
+              </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="row mb-3">
+              <div class="col-sm-9 offset-sm-3">
+                <div class="form-check">
+                  <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+                  <label class="form-check-label" for="invalidCheck3">Agree to terms and conditions</label>
+                  <div id="invalidCheck3Feedback" class="invalid-feedback">You must agree before submitting.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row mb-3">
+              <div class="col-sm-9 offset-sm-3">
+                <button class="btn btn-primary" type="submit">Submit form</button>
+              </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<br><br>
 {% endblock main-content %}
