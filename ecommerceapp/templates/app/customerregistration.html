@@ -28,7 +28,7 @@
                 {% endif %}
 
                 {% if messages %}
-                {% for msg_in messages %}
+                {% for msg in messages %}
                     <div class="alert alert-{{msg.tags}}" role="alert">
                         {{msg}}
                     </div>

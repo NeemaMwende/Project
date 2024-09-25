@@ -3,6 +3,7 @@ from django.views import View
 from . models import Product, CATEGORY_CHOICES  # Add CATEGORY_CHOICES here
 from . forms import CustomerRegistrationForm
 from django.contrib import messages
+from .forms import LoginForm
 
 def home(request):
     return render(request, "app/home.html")
@@ -52,7 +53,7 @@ class CustomerRegistrationView(View):
             messages.success(request, "Congratulations! User Registered Successfully")
             return render(request, "app/customerregistration.html", {'form': CustomerRegistrationForm()})  # Reset form on success
         else:
-            messages.error(request, "Invalid Input Data")
+            messages.warning(request, "Invalid Input Data")
             context = {
                 'form': form  # Pass the invalid form back to the template
             }
