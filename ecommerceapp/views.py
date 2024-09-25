@@ -10,7 +10,7 @@ def home(request):
 def about(request):
     return render(request, "app/about.html")
 
-def home(request):
+def contact(request):
     return render(request, "app/contact.html")
 
 class CategoryView(View):
