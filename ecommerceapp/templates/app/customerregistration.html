@@ -26,6 +26,14 @@
                         <p class="alert aleart-danger my-3">{{error}}</p>
                     {% endfor %}
                 {% endif %}
+
+                {% if messages %}
+                {% for msg_in messages %}
+                    <div class="alert alert-{{msg.tags}}" role="alert">
+                        {{msg}}
+                    </div>
+                {% endfor %}
+                {% endif %}
             </form>
         </div>
     </div>
