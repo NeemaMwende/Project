@@ -4,6 +4,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
+from .forms import LoginForm
 
 app_name = 'app'  # Ensure your app is namespaced
 
@@ -17,5 +18,6 @@ urlpatterns = [
     
     #login authentication
     path('registration/', views.CustomerRegistrationView.as_view(), name="customerregistration"),  # Ensure this is correct
-    path('accounts/login', auth_view.LoginView.as_view(template_name="app/login.html", authentication_form=LoginForm) , name='login'),
+    path('accounts/login/', auth_view.LoginView.as_view(template_name="app/login.html", authentication_form=LoginForm) , name='login'),
+    path('password-reset/', auth_view.PasswordResetView.as_view(template_name="app/password_reset.html"), name='password_reset'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
