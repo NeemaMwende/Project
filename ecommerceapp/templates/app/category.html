@@ -27,7 +27,7 @@
             <div class="col-md-9">
                 <div class="row">
                     {% for product in products %}
-                        <div class="col-md-4">
+                        {% comment %} <div class="col-md-4">
                             <div class="card">
                                 <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}">
                                 <div class="card-body">
@@ -37,7 +37,19 @@
                                     <a href="{% url 'app:product-detail' 'product.id '%}" class="btn btn-primary">Buy Now</a>
                                 </div>
                             </div>
+                        </div> {% endcomment %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.title }}</h5>
+                                    <p class="card-text">{{ product.description }}</p>
+                                    <p class="card-text">Price: ${{ product.selling_price }}</p>
+                                    <a href="{% url 'app:product-detail' product.id %}" class="btn btn-primary">Buy Now</a>
+                                </div>
+                            </div>
                         </div>
+                        
                     {% endfor %}
                 </div>
             </div> 
