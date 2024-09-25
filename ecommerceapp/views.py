@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from .models import Product, CATEGORY_CHOICES  # Add CATEGORY_CHOICES here
-
+from . models import Product, CATEGORY_CHOICES  # Add CATEGORY_CHOICES here
+from . forms import CustomerRegistrationForm
 
 
 def home(request):
@@ -36,3 +36,13 @@ class ProductDetail(View):
             'product': product,
         }
         return render(request, "app/product_detail.html", context)
+    
+class CustomerRegistrationView(View):
+    def get(self, request):
+        form = CustomerRegistrationForm()
+        context = {
+            'form': form  # Ensure 'form' is passed to the template
+        }
+        return render(request, "app/customerregistration.html", context)
+
+    
