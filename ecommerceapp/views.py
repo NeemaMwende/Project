@@ -17,19 +17,19 @@ def contact(request):
 class CategoryView(View):
     def get(self, request, val):
         products = Product.objects.filter(category=val)
-        categories = dict(CATEGORY_CHOICES)  # Now this should work
+        categories = dict(CATEGORY_CHOICES)
         context = {
             'products': products,
             'categories': categories,
         }
         return render(request, "app/category.html", context)
-    
+
 class CategoryTitle(View):
     def get(self, request, val):
         product = Product.objects.filter(title=val)
         title = Product.objects.filter(category=product[0].category).values('title').annotate(total=Count(''))
         return render(request, "app/category_title.html", context)
-    
+
 class ProductDetail(View):
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
@@ -37,25 +37,25 @@ class ProductDetail(View):
             'product': product,
         }
         return render(request, "app/product_detail.html", context)
-    
+
 class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()
         context = {
-            'form': form  # Ensure 'form' is passed to the template
+            'form': form
         }
         return render(request, "app/customerregistration.html", context)
 
     def post(self, request):
-        form = CustomerRegistrationForm(request.POST)  # Create the form with POST data
+        form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Congratulations! User Registered Successfully")
-            return render(request, "app/customerregistration.html", {'form': CustomerRegistrationForm()})  # Reset form on success
+            return render(request, "app/customerregistration.html", {'form': CustomerRegistrationForm()})
         else:
             messages.warning(request, "Invalid Input Data")
             context = {
-                'form': form  # Pass the invalid form back to the template
+                'form': form
             }
             return render(request, "app/customerregistration.html", context)
 
@@ -112,4 +112,4 @@ class UpdateAddress(View):
             messages.success(request, "Profile Updated Successfully")
         else:
             messages.warning(request, "Invalid Input Data")
-        return redirect("address")
+        return redirect("app:address")

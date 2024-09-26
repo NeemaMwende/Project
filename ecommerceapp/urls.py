@@ -16,12 +16,19 @@ urlpatterns = [
     path("product-detail/<int:pk>", views.ProductDetail.as_view(), name="product-detail"),
     path("profile/", views.ProfileView.as_view(), name="profile"),
     path("address/", views.address, name="address"),  # Correct URL for address
-   path('address/update/<int:pk>/', views.UpdateAddress.as_view(), name='updateAddress'),  # Update path
+    path('address/update/<int:pk>/', views.UpdateAddress.as_view(), name='updateAddress'),  # Update path
 
-    # login authentication
+    # Login authentication
     path('registration/', views.CustomerRegistrationView.as_view(), name="customerregistration"),  
     path('accounts/login/', auth_view.LoginView.as_view(template_name="app/login.html", authentication_form=LoginForm), name='login'),
     path('password-reset/', auth_view.PasswordResetView.as_view(template_name="app/password_reset.html", form_class=MyPasswordResetForm), name='password_reset'),
     path('passwordchange/', auth_view.PasswordChangeView.as_view(template_name="app/changepassword.html", form_class=MyPasswordChangeForm, success_url='/passwordchangedone'), name='passwordchange'),
     path('passwordchangedone/', auth_view.PasswordChangeDoneView.as_view(template_name="app/passwordchangedone.html"), name='passwordchangedone'),
+    path("logout/", auth_view.LogoutView.as_view(next_page='app:login'), name="logout"),  # Corrected logout redirect
+
+    path('password-reset/', auth_view.PasswordResetView.as_view(template_name="app/password_reset.html", form_class=MyPasswordResetForm), name='password_reset'),
+    path('password-reset/done/', auth_view.PasswordResetDoneView.as_view(template_name="app/password_reset_done.html", form_class=MyPasswordResetForm), name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/', auth_view.PasswordResetConfirmView.as_view(template_name="app/password_reset_confirm.html", form_class=MySetPasswordForm), name='password_reset_confirm'),
+    path('password-reset-complete/', auth_view.PasswordResetCompleteView.as_view(template_name="app/password_reset_complete.html"), name='password_reset_complete'),
+ 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
