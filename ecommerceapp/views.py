@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from . models import Product, CATEGORY_CHOICES  # Add CATEGORY_CHOICES here
-from . forms import CustomerRegistrationForm, CustomerProfileForm
+from .models import Product, CATEGORY_CHOICES, Customer  # Add CATEGORY_CHOICES here
+from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from .forms import LoginForm
 
@@ -63,6 +63,7 @@ class ProfileView(View):
     def get(self, request):
         form = CustomerProfileForm()
         return render(request, "app/profile.html", locals())
+
     def post(self, request):
         form = CustomerProfileForm(request.POST)
         if form.is_valid():
@@ -74,14 +75,14 @@ class ProfileView(View):
             state = form.cleaned_data['state']
             zipcode = form.cleaned_data['zipcode']
             
-            reg = Customer(user=user, name=name, locality=locality,mobile=mobile,city=city,state=state,zipcode=zipcode)
+            reg = Customer(user=user, name=name, locality=locality, mobile=mobile, city=city, state=state, zipcode=zipcode)
             reg.save() 
-            messages.success(request,"Congratulations! Profile Saved Successfully")
+            messages.success(request, "Congratulations! Profile Saved Successfully")
         else:
             messages.warning(request, "Invalid Input Data")
         return render(request, "app/profile.html", locals())
-    
+
 def address(request):
     add = Customer.objects.filter(user=request.user)
-    return render(request, 'app/address.html',locals())
-    
+    context = {'add': add}
+    return render(request, 'app/address.html', context)

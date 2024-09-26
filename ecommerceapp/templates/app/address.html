@@ -10,31 +10,37 @@
         <div class="row"> <!-- Added row class to structure the grid properly -->
             <div class="col-sm-2 border-end">
                 <ul class="list-unstyled">
-                    <li class="d-grid"><a href="{% url 'app:profile' %}" class="btn btn-primary">Profile</a></li>
-                    <li class="d-grid"><a href="{% url 'app:address' %}" class="btn">Address</a></li>
+                    <li class="d-grid"><a href="{% url 'app:profile' %}" class="btn">Profile</a></li>
+                    <li class="d-grid"><a href="{% url 'app:address' %}" class="btn btn-primary">Address</a></li>
                 </ul>
             </div>
 
             <div class="col-sm-8 offset-sm-1">
                 <div class="row">
-                    {% for ad in add %}
-                        <div class="col-sm-6">
-                            <div class="card m-2">
-                                <div class="card-body">
-                                    <h3>Address {{forloop.counter}}</h3>
-                                    <p>Name:  {{ad.name}}</p>
-                                    <p>Locality: {{ad.locality}}</p>
-                                    <p>Mobile: {{ad.mobile}}</p>
-                                    <p>Email: {{ad.email}}</p>
-                                    <p>City: {{ad.city}}</p>
-                                    <p>State: {{ad.state}}</p>
-                                    <p>Pincode: {{ad.zipcode}}</p>
-                                    <p class="text-center"><a href="{% url 'app:updateAddress' 'pk=ad.id' %}" type="button" class="btn btn-success">Update</a></p>
+                    {% if add %}
+                        {% for ad in add %}
+                            <div class="col-sm-6">
+                                <div class="card m-2">
+                                    <div class="card-body">
+                                        <h3>Address {{ forloop.counter }}</h3>
+                                        <p>Name:  {{ ad.name }}</p>
+                                        <p>Locality: {{ ad.locality }}</p>
+                                        <p>Mobile: {{ ad.mobile }}</p>
+                                        <p>Email: {{ ad.email }}</p>
+                                        <p>City: {{ ad.city }}</p>
+                                        <p>State: {{ ad.state }}</p>
+                                        <p>Pincode: {{ ad.zipcode }}</p>
+                                        <!-- Update button commented out for now -->
+                                        {% comment %} <!-- <p class="text-center"><a href="{% url 'app:updateAddress' pk=ad.id %}" class="btn btn-success">Update</a></p> --> {% endcomment %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor%}
+                        {% endfor %}
+                    {% else %}
+                        <p>No addresses found for this user.</p>
+                    {% endif %}
                 </div>
             </div>
-
+        </div>
+    </div>
 {% endblock main-content %}
