@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Product, CATEGORY_CHOICES, Customer  # Add CATEGORY_CHOICES here
+from .models import Product, CATEGORY_CHOICES, Customer, Cart  # Add CATEGORY_CHOICES here
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from .forms import LoginForm
@@ -119,3 +119,15 @@ class UpdateAddress(View):
         else:
             messages.warning(request, "Invalid Input Data")
         return redirect("app:address")
+
+def add_to_cart(request):
+    user = request.user
+    product_id = request.GET.get('prod_id')
+    product = Product.objects.get(id=product_id)
+    Cart(user=user,product=product).save()
+    return redirect("/cart")
+
+def show_cart(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user)
+    return render(request, 'app/addtocart.html', locals())
