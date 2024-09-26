@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from . models import Product, CATEGORY_CHOICES  # Add CATEGORY_CHOICES here
-from . forms import CustomerRegistrationForm
+from . forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from .forms import LoginForm
 
@@ -61,6 +61,9 @@ class CustomerRegistrationView(View):
 
 class ProfileView(View):
     def get(self, request):
+        form = CustomerProfileForm()
         return render(request, "app/profile.html", locals())
     def post(self, request):
         return render(request, "app/profile.html", locals())
+    
+    
