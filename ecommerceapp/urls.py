@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
 from .forms import LoginForm, MyPasswordResetForm, MyPasswordChangeForm, MySetPasswordForm
+from django.contrib.auth.views import LogoutView
 
 app_name = 'app'  # Ensure your app is namespaced
 
@@ -17,6 +18,7 @@ urlpatterns = [
     path("profile/", views.ProfileView.as_view(), name="profile"),
     path("address/", views.address, name="address"),
     path('address/update/<int:pk>/', views.UpdateAddress.as_view(), name='updateAddress'),
+    # path('product/<int:product_id>/', views.product_detail, name='product_detail'),
 
     # Login authentication
     path('registration/', views.CustomerRegistrationView.as_view(), name="customerregistration"),

@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import LoginForm
 
 def home(request):
+    products = Product.objects.all()
     return render(request, "app/home.html")
 
 def about(request):
@@ -37,6 +38,11 @@ class ProductDetail(View):
             'product': product,
         }
         return render(request, "app/product_detail.html", context)
+
+        # def product_detail(request, product_id):
+        #     product = get_object_or_404(Product, id=product_id)
+        # context = {'product': product}
+        # return render(request, 'product_detail.html', context)
 
 class CustomerRegistrationView(View):
     def get(self, request):
