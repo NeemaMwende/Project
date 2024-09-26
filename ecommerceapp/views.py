@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from .models import Product, CATEGORY_CHOICES, Customer  # Add CATEGORY_CHOICES here
 from .forms import CustomerRegistrationForm, CustomerProfileForm
@@ -101,8 +101,15 @@ class UpdateAddress(View):
         customer = Customer.objects.get(pk=pk)
         form = CustomerProfileForm(request.POST, instance=customer)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Address Updated Successfully")
+            add = Customer.objects.get(pk=pk)
+            add.name = form.cleaned_data['name']
+            add.locality = form.cleaned_data['locality']
+            add.city = form.cleaned_data['city']
+            add.mobile = form.cleaned_data['mobile']
+            add.state = form.cleaned_data['state']
+            add.zipcode = form.cleaned_data['zipcode']
+            add.save()
+            messages.success(request, "Profile Updated Successfully")
         else:
             messages.warning(request, "Invalid Input Data")
-        return render(request, 'app/updateAddress.html', {'form': form, 'customer': customer})
+        return redirect("address")
