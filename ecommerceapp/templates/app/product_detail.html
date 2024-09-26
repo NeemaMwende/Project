@@ -25,12 +25,12 @@
                     <li>Prodapp: {{product.prodapp}}</li>
                 </ul>
                 <div class="buttons row flex" style="font-family: Rajdhani;">
-                    <button type="submit" class="d-grid gap-2 btn1 btn btn-danger 
-                        p-1 m-1 btn-lg text-decoration-none text-white">
-                        Add to Cart
-                    </button>
+                    <form class="d-inline" action="/add-to-cart">
+                        <input type="hidden" name="prod_id" value={{product.id}} />
+                        <button type="submit" class="btn btn-danger p-1 m-1 btn-lg " style="width:100%;"> Add to Cart </button>
+                    </form>
                     <div class="btn btn-dark p-1 m-1 btn-lg">
-                        <a href="#" class="text-decoration-none text-white">Buy Now</a>
+                        <a href="{% url 'app:showcart' %}" class="text-decoration-none text-white">Buy Now</a>
                     </div> 
                 </div>
             </div>

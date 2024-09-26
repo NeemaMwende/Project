@@ -20,6 +20,11 @@ urlpatterns = [
     path('address/update/<int:pk>/', views.UpdateAddress.as_view(), name='updateAddress'),
     path('add-to-cart/', views.add_to_cart, name="add-to-cart"),
     path('cart/', views.show_cart, name='showcart'),
+    path('checkout/', views.show_cart, name='checkout'),
+    path('pluscart/', views.plus_cart, name='pluscart'),  # Correct URL for incrementing cart
+    path('minuscart/', views.minus_cart, name='minuscart'),  # Add minus cart URL
+    path('removecart/', views.remove_cart, name='removecart'),  # Add remove cart URL
+    # path('search/', views.search, name='search'),
     # path('product/<int:product_id>/', views.product_detail, name='product_detail'),
 
     # Login authentication

@@ -4,6 +4,8 @@ from .models import Product, CATEGORY_CHOICES, Customer, Cart  # Add CATEGORY_CH
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from .forms import LoginForm
+from django.http import JsonResponse
+from django.db.models import Q
 
 def home(request):
     products = Product.objects.all()
@@ -130,4 +132,32 @@ def add_to_cart(request):
 def show_cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user)
+    amount = 0
+    for P in cart:
+        value = P.quantity * P.product.discounted_price
+        amount = amount + value
+    totalamount = amount + 40
     return render(request, 'app/addtocart.html', locals())
+
+def plus_cart(request):
+    if request.method == 'GET':
+        prod_id = request.GET.get('prod_id')  # Corrected the use of .get()
+        c = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))  # Correct variable name
+        c.quantity += 1
+        c.save()
+        
+        # Recalculate the cart totals
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+        amount = 0
+        for item in cart:
+            value = item.quantity * item.product.discounted_price
+            amount += value
+        totalamount = amount + 40
+        
+        data = {
+            'quantity': c.quantity,  # Use the correct variable c
+            'amount': amount,
+            'totalamount': totalamount
+        }
+        return JsonResponse(data)
