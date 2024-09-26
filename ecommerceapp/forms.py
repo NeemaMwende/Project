@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm # Correct capitalization
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, SetPasswordForm # Correct capitalization
 from django.contrib.auth.models import User
 
 from .models import Customer
@@ -17,7 +17,7 @@ class CustomerRegistrationForm(UserCreationForm):
     class Meta:
         #model = User
         model = UserCreationForm.Meta.model  # Use the same model as UserCreationForm
-        fields = ('username', 'email', 'password1', 'password2')  # Specify the fields you want in your form
+        fields = [ 'username', 'email', 'password1', 'password2']  # Specify the fields you want in your form
 
 class MyPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label="Old Password", widget=forms.PasswordInput(attrs={"autocomplete": "current-password","autofocus":"True","class":"form-control"}))
@@ -25,8 +25,12 @@ class MyPasswordChangeForm(PasswordChangeForm):
     new_password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput(attrs={"autocomplete": "current-password","class":"form-control"}))
 
 class MyPasswordResetForm(PasswordChangeForm):
-    pass
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
     
+class MySetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={"autocomplete": "current-password","class":"form-control"}))
+    new_password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput(attrs={"autocomplete": "current-password","class":"form-control"}))
+
 class CustomerProfileForm(forms.ModelForm):
     class Meta:
         model = Customer
