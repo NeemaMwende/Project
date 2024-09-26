@@ -4,27 +4,39 @@
 
 {% block main-content %}
 <div class="container">
-    <div class="row my-3">
-        <div class="col-sm-6 offset-sm-3">
-            <br><br>
-            <h3 class="text-center">Reset Password</h3>
-            <hr>
-            <form action="" method="post" novalidate class="shadow p-5">
-                {% csrf_token %}
-                {% for fm in form %}
-                    {{ fm.label_tag }} {{ fm }} <small class="text-danger">{{ fm.errors|striptags }}</small><br>
-                {% endfor %}
+    <div class="col-sm-6 offset-sm-3">
+        <br><br>
+        <h3 class="text-center">Login</h3>
+        <hr>
 
-                <input type="submit" class="btn btn-primary mt-4" value="Login">
+        <form action="" method="post" novalidate class="shadow p-5">
+            {% csrf_token %}
+            {% for fm in form %}
+                {{ fm.label_tag }} {{ fm }} <small class="text-danger">{{ fm.errors|striptags }}</small>
                 <br>
-                
-                {% if form.non_field_errors %}
-                    {% for error in form.non_field_errors %}
-                        <p class="alert alert-danger my-3">{{ error }}</p>
-                    {% endfor %}
-                {% endif %}
-            </form>
-        </div>
+            {% endfor %}
+            <input type="submit" value="Login" class="btn btn-primary"> <br>
+
+            <div class="text-center text-primary fw-bold">
+                <small>New User? <a href="{% url 'app:customerregistration' %}" class="text-danger">Create Account</a></small>
+                <br>
+                <small><a href="{% url 'app:password_reset' %}" class="text-danger">Forgot Password?</a></small>
+            </div>
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+
+            {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-{{ msg.tags }}" role="alert">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+            {% endif %}
+        </form>
     </div>
 </div>
 {% endblock main-content %}

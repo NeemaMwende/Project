@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, SetPasswordForm # Correct capitalization
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, SetPasswordForm, PasswordResetForm # Correct capitalization
 from django.contrib.auth.models import User
 
 from .models import Customer
@@ -15,7 +15,7 @@ class CustomerRegistrationForm(UserCreationForm):
     password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
     class Meta:
-        #model = User
+        model = User
         model = UserCreationForm.Meta.model  # Use the same model as UserCreationForm
         fields = [ 'username', 'email', 'password1', 'password2']  # Specify the fields you want in your form
 
@@ -24,7 +24,7 @@ class MyPasswordChangeForm(PasswordChangeForm):
     new_password1 = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={"autocomplete": "current-password","class":"form-control"}))
     new_password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput(attrs={"autocomplete": "current-password","class":"form-control"}))
 
-class MyPasswordResetForm(PasswordChangeForm):
+class MyPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
     
 class MySetPasswordForm(SetPasswordForm):
