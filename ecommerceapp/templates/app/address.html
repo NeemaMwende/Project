@@ -6,8 +6,8 @@
     <div class="container my-5">
         <div class="row">
             <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
-        </div> <!-- Closing the .row div -->
-        <div class="row"> <!-- Added row class to structure the grid properly -->
+        </div>
+        <div class="row">
             <div class="col-sm-2 border-end">
                 <ul class="list-unstyled">
                     <li class="d-grid"><a href="{% url 'app:profile' %}" class="btn">Profile</a></li>
@@ -30,8 +30,9 @@
                                         <p>City: {{ ad.city }}</p>
                                         <p>State: {{ ad.state }}</p>
                                         <p>Pincode: {{ ad.zipcode }}</p>
-                                        <!-- Update button commented out for now -->
-                                        {% comment %} <!-- <p class="text-center"><a href="{% url 'app:updateAddress' pk=ad.id %}" class="btn btn-success">Update</a></p> --> {% endcomment %}
+                                        <p class="text-center">
+                                            <a href="{% url 'app:updateAddress' pk=ad.id %}" type="button" class="btn btn-success">Update</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

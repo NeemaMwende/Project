@@ -86,3 +86,23 @@ def address(request):
     add = Customer.objects.filter(user=request.user)
     context = {'add': add}
     return render(request, 'app/address.html', context)
+
+class UpdateAddress(View):
+    def get(self, request, pk):
+        customer = Customer.objects.get(pk=pk)
+        form = CustomerProfileForm(instance=customer)
+        context = {
+            'form': form,
+            'customer': customer
+        }
+        return render(request, 'app/updateAddress.html', context)
+
+    def post(self, request, pk):
+        customer = Customer.objects.get(pk=pk)
+        form = CustomerProfileForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Address Updated Successfully")
+        else:
+            messages.warning(request, "Invalid Input Data")
+        return render(request, 'app/updateAddress.html', {'form': form, 'customer': customer})
