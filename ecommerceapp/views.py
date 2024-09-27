@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Product, Customer, Cart
+from .models import Product, Customer, Cart, Address
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.http import JsonResponse
@@ -140,23 +140,39 @@ def calculate_cart_totals(user):
     quantity = cart[0].quantity if cart else 0
     return {'amount': amount, 'totalamount': totalamount, 'quantity': quantity}
 
-# Checkout View
 class Checkout(View):
     def get(self, request):
         user = request.user
-        address = Customer.objects.filter(user=user)
+        addresses = Address.objects.filter(user=user)  # Fetch user's addresses
         cart_items = Cart.objects.filter(user=user)
         amount = sum(item.quantity * item.product.discounted_price for item in cart_items)
         totalamount = amount + 40  # Adding shipping charge
-        return render(request, 'app/checkout.html', locals())
+        return render(request, 'app/checkout.html', {'addresses': addresses, 'cart_items': cart_items, 'amount': amount, 'totalamount': totalamount})
 
     def post(self, request):
         user = request.user
         address_id = request.POST.get('address')
-        address = Customer.objects.get(id=address_id)
+        custom_address = request.POST.get('customAddress')
+        
+        # Check if a custom address was provided
+        if custom_address:
+            # Split the custom address into components
+            address_parts = custom_address.split(',')
+            address_line = address_parts[0].strip()
+            city = address_parts[1].strip() if len(address_parts) > 1 else ''
+            zip_code = address_parts[2].strip() if len(address_parts) > 2 else ''
+            
+            # Create a new address for the user
+            address = Address.objects.create(user=user, address_line=address_line, city=city, zip_code=zip_code)
+        else:
+            # Get the selected address from the dropdown
+            address = Address.objects.get(id=address_id)
+        
+        # Process the order
         cart_items = Cart.objects.filter(user=user)
         for item in cart_items:
             OrderPlaced(user=user, customer=address, product=item.product, quantity=item.quantity).save()
             item.delete()  # Clear cart after order
+        
         messages.success(request, "Your order has been placed successfully!")
         return redirect("app:home")

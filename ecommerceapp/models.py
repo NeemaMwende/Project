@@ -82,4 +82,13 @@ class  Cart(models.Model):
     quantity = models.IntegerField(default=1)
     
     class Meta:
-            unique_together = (('user', 'product'),)  
+            unique_together = (('user', 'product'),) 
+            
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    address_line = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.address_line}, {self.city}, {self.zip_code}" 
