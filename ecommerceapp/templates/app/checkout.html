@@ -1,0 +1,83 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Checkout</h2>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Order Summary</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ item.product.product_image.url }}" alt="{{ item.product.title }}" class="img-fluid img-thumbnail me-3" height="50" width="50">
+                                        {{ item.product.title }}
+                                    </div>
+                                </td>
+                                <td>{{ item.quantity }}</td>
+                                <td>Rs. {{ item.product.discounted_price }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="2" class="text-end"><strong>Subtotal:</strong></td>
+                                <td>Rs. {{ amount }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-end"><strong>Shipping:</strong></td>
+                                <td>Rs. 40</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-end"><strong>Total:</strong></td>
+                                <td><strong>Rs. {{ totalamount }}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Shipping Details</h3>
+                    <form method="post" action="{% url 'app:checkout' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Select Address:</label>
+                            <select name="address" id="address" class="form-select" required>
+                                <option value="" disabled selected>Select an address</option>
+                                {% for addr in address %}
+                                <option value="{{ addr.id }}">{{ addr.address_line }}, {{ addr.city }}, {{ addr.zip_code }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="payment" class="form-label">Payment Method:</label>
+                            <select name="payment" id="payment" class="form-select" required>
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="cash">Cash on Delivery</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

@@ -4,7 +4,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
 from .forms import LoginForm, MyPasswordResetForm, MyPasswordChangeForm, MySetPasswordForm
-from django.contrib.auth.views import LogoutView
 
 app_name = 'app'  # Ensure your app is namespaced
 
@@ -20,12 +19,10 @@ urlpatterns = [
     path('address/update/<int:pk>/', views.UpdateAddress.as_view(), name='updateAddress'),
     path('add-to-cart/', views.add_to_cart, name="add-to-cart"),
     path('cart/', views.show_cart, name='showcart'),
-    path('checkout/', views.show_cart, name='checkout'),
-    path('pluscart/', views.plus_cart, name='pluscart'),  # Correct URL for incrementing cart
-    path('minuscart/', views.minus_cart, name='minuscart'),  # Add minus cart URL
-    path('removecart/', views.remove_cart, name='removecart'),  # Add remove cart URL
-    # path('search/', views.search, name='search'),
-    # path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+    path('checkout/', views.Checkout.as_view(), name='checkout'),
+    path('pluscart/', views.plus_cart, name='pluscart'),  # Increment cart
+    path('minuscart/', views.minus_cart, name='minuscart'),  # Decrement cart
+    path('removecart/', views.remove_cart, name='removecart'),  # Remove from cart
 
     # Login authentication
     path('registration/', views.CustomerRegistrationView.as_view(), name="customerregistration"),
@@ -33,10 +30,8 @@ urlpatterns = [
     path('password-reset/', auth_view.PasswordResetView.as_view(template_name="app/password_reset.html", form_class=MyPasswordResetForm), name='password_reset'),
     path('passwordchange/', auth_view.PasswordChangeView.as_view(template_name="app/changepassword.html", form_class=MyPasswordChangeForm, success_url='/passwordchangedone'), name='passwordchange'),
     path('passwordchangedone/', auth_view.PasswordChangeDoneView.as_view(template_name="app/passwordchangedone.html"), name='passwordchangedone'),
-    path("logout/", auth_view.LogoutView.as_view(next_page='app:login'), name="logout"),  # Corrected logout redirect
-
-    path('password-reset/done/', auth_view.PasswordResetDoneView.as_view(template_name="app/password_reset_done.html"), name='password_reset_done'),  # Removed form_class
+    path("logout/", auth_view.LogoutView.as_view(next_page='app:login'), name="logout"),
+    path('password-reset/done/', auth_view.PasswordResetDoneView.as_view(template_name="app/password_reset_done.html"), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', auth_view.PasswordResetConfirmView.as_view(template_name="app/password_reset_confirm.html", form_class=MySetPasswordForm), name='password_reset_confirm'),
     path('password-reset-complete/', auth_view.PasswordResetCompleteView.as_view(template_name="app/password_reset_complete.html"), name='password_reset_complete'),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
