@@ -1,4 +1,19 @@
 {
     "Codegeex.GenerationPreference": "automatic",
-    "Codegeex.SidebarUI.LanguagePreference": "English"
+    "Codegeex.SidebarUI.LanguagePreference": "English",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Ecom",
+            "database": "ecommerceproject",
+            "username": "root"
+        }
+    ]
 }

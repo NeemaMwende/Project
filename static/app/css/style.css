@@ -1,0 +1,94 @@
+/* Owl Carousel Item Styling */
+.owl-carousel .item {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+    transition: transform .5s ease;
+}
+
+.owl-carousel .item:hover {
+    transform: scale(1.1);
+}
+
+/* Owl Carousel Navigation Buttons */
+.owl-next {
+    float: right;
+}
+
+.owl-prev {
+    float: left;
+}
+
+.owl-prev span, .owl-next span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Buttermilk Section */
+.buttermilk {
+    background-color: #fff;
+    background-image: linear-gradient(#fff7ef, #fff);
+    padding: 50px 40px;
+    border: 1px solid #efe8e1;
+    padding-bottom: 20px;
+}
+
+/* General Section Backgrounds */
+.smbg {
+    background-color: #fff;
+    background-image: linear-gradient(rgba(110, 69, 143, 0.1), #fff);
+}
+
+.curdbgpro {
+    background-color: #fff;
+    background-image: linear-gradient(rgba(10, 77, 123, 0.1), #fff);
+}
+
+/* Goodness Section Container */
+.goodnessseccont img {
+    width: 90px;
+}
+
+.mlkpro {
+    color: #636362;
+    font-size: 18px;  /* Adjusted font size */
+    line-height: 22px;
+    margin-bottom: 10px;
+    width: 70%;       /* Reduced width of text */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.goodnesssec a {
+    text-decoration: none;
+}
+
+/* General Image Styling */
+img {
+    max-width: 200px;
+    height: 200px;
+    display: block;
+}
+
+/* Product Image Styling */
+.product-image {
+    max-width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Adjust Image Height in Goodness Section */
+.goodnessesc img {
+    width: 200px;
+    height: 200px;
+    /* object-fit: cover;  Crops the image if necessary while keeping aspect ratio */
+}
+
+/* Owl Carousel Image Hover Effect */
+.owl-carousel img {
+    transition: transform .5s ease;
+}
+
+.owl-carousel img:hover {
+    transform: scale(1.25);
+}

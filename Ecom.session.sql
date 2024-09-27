@@ -1,0 +1,1 @@
+SELECT * FROM ecommerceapp_product;

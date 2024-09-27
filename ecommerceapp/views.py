@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect ,get_object_or_404
 from django.views import View
 from .models import Product, Customer, Cart, Address
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.http import JsonResponse
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.db.utils import IntegrityError
+from django.db import transaction
 
 # Home View
 def home(request):
@@ -83,14 +86,28 @@ class UpdateAddress(View):
         return redirect("app:address")
 
 # Add to Cart View
+@login_required
 def add_to_cart(request):
     user = request.user
-    product_id = request.GET.get('prod_id')
-    product = Product.objects.get(id=product_id)
-    Cart(user=user, product=product).save()
-    return redirect("/cart")
-
-# Show Cart View
+    prod_id = request.GET.get('prod_id')
+    product = get_object_or_404(Product, id=prod_id)
+    
+    try:
+        # Use atomic transaction to avoid race conditions
+        with transaction.atomic():
+            # Check if product is already in the user's cart
+            cart_item, created = Cart.objects.get_or_create(user=user, product=product)
+            
+            if not created:
+                # If the item already exists, increment the quantity
+                cart_item.quantity += 1
+                cart_item.save()
+    
+    except IntegrityError:
+        # Handle any unexpected integrity errors
+        return redirect('error_page')  # Redirect to an error page or display a message
+    
+    return redirect('/cart')# Show Cart View
 def show_cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user)
