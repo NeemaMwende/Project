@@ -57,20 +57,44 @@
                     <form method="post" action="{% url 'app:checkout' %}">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="address" class="form-label">Select Address:</label>
-                            <select name="address" id="address" class="form-select" required>
-                                <option value="" disabled selected>Select an address</option>
-                                {% for addr in addresses %}
-                                <option value="{{ addr.id }}">{{ addr.address_line }}, {{ addr.city }}, {{ addr.zip_code }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="customAddress" class="form-label">Or Add a Custom Address:</label>
-                            <input type="text" id="customAddress" name="customAddress" class="form-control" placeholder="Enter your address" />
-                        </div>
-                        
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Select Address:</label>
+                                <select name="address" id="address" class="form-select" required onchange="toggleAddressFields()">
+                                    <option value="" disabled selected>Select an address</option>
+                                    {% for addr in addresses %}
+                                    <option value="{{ addr.id }}">{{ addr.address_line }}, {{ addr.city }}, {{ addr.zip_code }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="customAddress" class="form-label">Or Add a Custom Address:</label>
+                                <input type="text" id="customAddress" name="customAddress" class="form-control" placeholder="Enter your address" oninput="toggleAddressFields()" />
+                            </div>
+                            
+                            <script>
+                                function toggleAddressFields() {
+                                    const addressSelect = document.getElementById('address');
+                                    const customAddressInput = document.getElementById('customAddress');
+                            
+                                    // If a predefined address is selected, disable the custom address input
+                                    if (addressSelect.value) {
+                                        customAddressInput.disabled = true;
+                                        customAddressInput.value = '';  // Clear the custom address input if it was filled
+                                    } else {
+                                        customAddressInput.disabled = false;  // Enable custom address input if nothing is selected
+                                    }
+                            
+                                    // If a custom address is being typed, disable the address select dropdown
+                                    if (customAddressInput.value.trim() !== '') {
+                                        addressSelect.disabled = true;
+                                        addressSelect.value = '';  // Clear the address select if a custom address is being entered
+                                    } else {
+                                        addressSelect.disabled = false;  // Enable address select if the custom address is empty
+                                    }
+                                }
+                            </script>
+                            
                         
                         <div class="mb-3">
                             <label for="payment" class="form-label">Payment Method:</label>
