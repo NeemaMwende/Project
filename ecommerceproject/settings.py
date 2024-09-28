@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,7 @@ SECRET_KEY = 'django-insecure-mt@dn%)vf_#@excx*omgv-6%t$kb2=$8+r+ol54k8=6l7ej_%r
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ecommerceapp.onrender.com', 'localhost']
 
 
 # Application definition
@@ -43,6 +45,12 @@ INSTALLED_APPS = [
     
 ]
 
+# Settings for serving static files on Render
+if not DEBUG:
+    # Configure these only for production
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerceproject.urls'
@@ -88,6 +97,10 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# Parse database configuration from the environment variable for Render deployment
+DATABASES['default'] = dj_database_url.config(
+    default=os.getenv('DATABASE_URL', 'mysql://root:Mikaelson@12.@localhost:3306/ecommerceproject')
+)
 
 
 # Password validation
@@ -132,6 +145,13 @@ LOGIN_REDIRECT_URL = '/profile/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Configure static file storage to use Whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Ensure your STATICFILES_DIRS is set correctly
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
