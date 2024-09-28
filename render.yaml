@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: ecommerce-django
+    env: python
+    plan: free  # You can change the plan later
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn ecommerceproject.wsgi --log-file -"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ecommerce-database  # Database name created in Render
+          property: connectionString
+    autoDeploy: true
+    healthCheckPath: "/"
+    regions:
+      - oregon
+      - frankfurt
+
+  - type: mysql
+    name: ecommerce-database
+    plan: free  # Choose appropriate MySQL plan
+    version: 8.0
