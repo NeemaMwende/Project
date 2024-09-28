@@ -193,3 +193,34 @@ class Checkout(View):
         
         messages.success(request, "Your order has been placed successfully!")
         return redirect("app:home")
+    
+def product_search(request):
+    query = request.GET.get('q')  # Get the search query from the GET request
+    products = Product.objects.all()  # Get all products as default
+
+    if query:
+        # Perform a case-insensitive search on the product name and description
+        products = Product.objects.filter(name__icontains=query) | Product.objects.filter(description__icontains=query)
+
+    context = {
+        'products': products,
+        'query': query,
+    }
+    
+    return render(request, 'product_search_results.html', context)
+
+@login_required
+def orders_view(request):
+    orders = Order.objects.filter(user=request.user)  # Get orders for the logged-in user
+    context = {
+        'orders': orders,
+    }
+    return render(request, 'orders.html', context)
+
+@login_required
+def wishlist_view(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user)  # Get wishlist for the logged-in user
+    context = {
+        'wishlist_items': wishlist_items,
+    }
+    return render(request, 'wishlist.html', context)

@@ -1,0 +1,31 @@
+<!-- orders.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Your Orders</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Ordered At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.product.name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.ordered_at }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">You have no orders yet.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

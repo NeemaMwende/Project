@@ -1,0 +1,17 @@
+<!-- wishlist.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Your Wishlist</h2>
+    <ul class="list-group">
+        {% for item in wishlist_items %}
+            <li class="list-group-item">
+                {{ item.product.name }}
+                <a href="{% url 'add_to_cart' item.product.id %}" class="btn btn-success btn-sm float-end">Add to Cart</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Your wishlist is empty.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!-- product_search_results.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Search Results</h2>
+
+    {% if products %}
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No products found matching your search.</p>
+    {% endif %}
+{% endblock %}
