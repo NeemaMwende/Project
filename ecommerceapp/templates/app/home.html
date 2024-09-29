@@ -111,8 +111,8 @@
           <div class="product-card">
               <a href="{% url 'app:product-detail' pk=4 %}">
                   <div class="goodnessesc">
-                      <img src="{% static 'app/images/products/milk-shake-chocolate.png' %}" class="product-img" alt="Milkshake">
-                      <p class="mlkpro">Milkshake</p>
+                      <img src="{% static 'app/images/products/sabja.png' %}" class="product-img" alt="Milkshake">
+                      <p class="mlkpro">Sabja</p>
                   </div>
               </a>
           </div>
@@ -121,12 +121,42 @@
           <div class="product-card">
               <a href="{% url 'app:product-detail' pk=5 %}">
                   <div class="goodnessesc">
-                      <img src="{% static 'app/images/products/cow-milk.png' %}" class="product-img" alt="Milk">
-                      <p class="mlkpro">Milk</p>
+                      <img src="{% static 'app/images/products/processedcheeseslice.png' %}" class="product-img" alt="Milk">
+                      <p class="mlkpro">Cheese</p>
                   </div>
               </a>
           </div>
       </div>
+      <div class="col">
+        <div class="product-card">
+            <a href="{% url 'app:product-detail' pk=5 %}">
+                <div class="goodnessesc">
+                    <img src="{% static 'app/images/products/buffalo-ghee.png' %}" class="product-img" alt="Milk">
+                    <p class="mlkpro">Ghee</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="product-card">
+            <a href="{% url 'app:product-detail' pk=5 %}">
+                <div class="goodnessesc">
+                    <img src="{% static 'app/images/products/cow-milk.png' %}" class="product-img" alt="Milk">
+                    <p class="mlkpro">Milk</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="product-card">
+            <a href="{% url 'app:product-detail' pk=5 %}">
+                <div class="goodnessesc">
+                    <img src="{% static 'app/images/products/milk-shake-chocolate.png' %}" class="product-img" alt="Milk">
+                    <p class="mlkpro">Chocolate Milkshake</p>
+                </div>
+            </a>
+        </div>
+    </div>
       <div class="col">
           <div class="product-card">
               <a href="{% url 'app:product-detail' pk=6 %}">
@@ -137,6 +167,38 @@
               </a>
           </div>
       </div>
+      <div class="col">
+        <div class="product-card">
+            <a href="{% url 'app:product-detail' pk=6 %}">
+                <div class="goodnessesc">
+                    <img src="{% static 'app/images/products/milk-shake-vanilla.png' %}" class="product-img" alt="Icebar">
+                    <p class="mlkpro">Vanilla Milkshake</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="product-card">
+            <a href="{% url 'app:product-detail' pk=6 %}">
+                <div class="goodnessesc">
+                    <img src="{% static 'app/images/products/dbtoned-milk.png' %}" class="product-img" alt="Icebar">
+                    <p class="mlkpro">Toned Milk</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="product-card">
+            <a href="{% url 'app:product-detail' pk=6 %}">
+                <div class="goodnessesc">
+                    <img src="{% static 'app/images/products/processedcheese.png' %}" class="product-img" alt="Icebar">
+                    <p class="mlkpro">Cheese</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <br><br>
   </div>
 </div>
+<br><br>
 {% endblock main-content %}

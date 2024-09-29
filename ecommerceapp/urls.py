@@ -24,7 +24,7 @@ urlpatterns = [
     path('minuscart/', views.minus_cart, name='minuscart'),  # Decrement cart
     path('removecart/', views.remove_cart, name='removecart'),  # Remove from cart
     path('search/', views.product_search, name='product_search'),
-    path('orders/', views.orders_view, name='orders'),  # URL for orders
+    # path('orders/', views.orders_view, name='orders'),  # URL for orders
     path('wishlist/', views.wishlist_view, name='wishlist'),  # URL for wishlist
 
     # Login authentication

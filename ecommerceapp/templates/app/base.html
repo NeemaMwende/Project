@@ -69,16 +69,16 @@
                     aria-expanded="false"> Neel</a>
                     <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                         <li><a class="dropdown-item" href="{% url 'app:profile' %}">Profile</a></li>
-                        <li><a class="dropdown-item" href="{% url 'app:orders_view' %}">Orders</a></li>
+                        <li><a class="dropdown-item" href="#">Orders</a></li>
                         <li><a class="dropdown-item" href="{% url 'app:passwordchange' %}">Change Password</a></li>
                         <li><a class="dropdown-item" href="{% url 'app:login' %}">Logout</a></li>
                 </li>
               </ul>
               <li class="nav-item mx-2">
-                <a class="nav-link text-white" href="{% url 'app:product_search'%}">Cart</a>
+                <a class="nav-link text-white" href="#">Cart</a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link text-white" href="{% url 'app:wishlist_view' %}">Wishlist</a>
+                <a class="nav-link text-white" href="#">Wishlist</a>
               </li>
           {%else%}
             <li class="nav-item mx-2">
