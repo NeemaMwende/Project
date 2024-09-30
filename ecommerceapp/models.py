@@ -113,13 +113,8 @@ class Wishlist(models.Model):
     def __str__(self):
         return f'{self.product.name} in {self.user.username}\'s Wishlist'
     
-# class UserPayment(models.Model):
-#     app_user = models.ForeignKey(AppUser, on_delete=models.CASCADE)   
-#     payment_bool = models.BooleanField(default=False)
-#     stripe_checkout_id = models.CharField(max_length=500)
-     
-# @receiver(post_save, sender=AppUser)
-# def create_user_payment(sender, instance, created, **kwargs):
-#     if created:
-#         UserPayment.objects.create(app_user=instance)
-    
+class Contact(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()

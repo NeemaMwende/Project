@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Product, Customer, Cart, Address, Wishlist, Order
-from .forms import CustomerRegistrationForm, CustomerProfileForm
+from .models import Product, Customer, Cart, Address, Wishlist, Order, Contact
+from .forms import CustomerRegistrationForm, CustomerProfileForm, ContactForm
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Q
@@ -250,56 +250,31 @@ def wishlist_view(request):
     wishlist_items = Wishlist.objects.filter(user=request.user)
     return render(request, 'app/wishlist.html', {'wishlist_items': wishlist_items})
 
-# @login_required(login_url='login')
-# def product_page(request):
-#     stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
-#     if request.method == "POST":
-#         checkout_session = stripe.checkout.Session.create(
-#             payment_method_types=['card'],
-#             line_items=[
-#                 {'price': settings.PRODUCT_PRICE, 'quantity': 1},
-#             ],
-#             mode='payment',
-#             success_url=settings.REDIRECT_DOMAIN + '/payment_successful?session_id={CHECKOUT_SESSION_ID}',
-#             cancel_url=settings.REDIRECT_DOMAIN + '/payment_cancelled',
-#         )
-#         return redirect(checkout_session.url, code=303)
-#     return render(request, 'app/product_page.html')
+# views.py (with model saving)
+from .models import Contact
 
-# def payment_successful(request):
-#     stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
-#     checkout_session_id = request.GET.get('session_id')
-#     session = stripe.checkout.Session.retrieve(checkout_session_id)
-#     customer = stripe.Customer.retrieve(session.customer)
-#     user_payment = UserPayment.objects.get(app_user=request.user)
-#     user_payment.stripe_checkout_id = checkout_session_id
-#     user_payment.save()
-#     return render(request, 'user_payment/payment_successful.html', {'customer': customer})
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Save data to the database
+            contact = Contact(
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                message=form.cleaned_data['message']
+            )
+            contact.save()
 
-# def payment_cancelled(request):
-#     return render(request, 'user_payment/payment_cancelled.html')
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('app:contact')
+        else:
+            messages.error(request, "There was an error sending your message. Please try again.")
+    else:
+        form = ContactForm()
 
-# @csrf_exempt
-# def stripe_webhook(request):
-#     stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
-#     time.sleep(10)
-#     payload = request.body
-#     signature_header = request.META['HTTP_STRIPE_SIGNATURE']
-#     try:
-#         event = stripe.Webhook.construct_event(payload, signature_header, settings.STRIPE_WEBHOOK_SECRET_TEST)
-#     except (ValueError, stripe.error.SignatureVerificationError):
-#         return HttpResponse(status=400)
+    return render(request, 'app/contact.html', {'form': form})
 
-#     if event['type'] == 'checkout.session.completed':
-#         session = event['data']['object']
-#         session_id = session.get('id')
-#         time.sleep(15)
-#         user_payment = UserPayment.objects.get(stripe_checkout_id=session_id)
-#         stripe.checkout.Session.list_line_items(session_id, limit=1)
-#         user_payment.payment_completed = True
-#         user_payment.save()
-#     return HttpResponse(status=200)
-
-# views.py
+    
 def thank_you(request):
     return render(request, 'app/thank_you.html')
