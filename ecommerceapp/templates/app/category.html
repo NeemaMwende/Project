@@ -46,6 +46,7 @@
                                     <p class="card-text">{{ product.description }}</p>
                                     <p class="card-text">Price: ${{ product.selling_price }}</p>
                                     <a href="{% url 'app:product-detail' product.id %}" class="btn btn-primary">Buy Now</a>
+                                    {% comment %} <a href="{% url 'app:wishlist_view' product.id %}" class="btn btn-primary">Add to Wishlist</a> {% endcomment %}
                                 </div>
                             </div>
                         </div>
