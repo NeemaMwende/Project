@@ -303,4 +303,3 @@ def wishlist_view(request):
 # views.py
 def thank_you(request):
     return render(request, 'app/thank_you.html')
-
