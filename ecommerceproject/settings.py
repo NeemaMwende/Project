@@ -42,8 +42,6 @@ ALLOWED_HOSTS = [
     # You can add more domains if needed
 ]
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
