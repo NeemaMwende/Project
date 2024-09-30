@@ -169,3 +169,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', 'sk_test_51Q4kgtE7JEpDvfCUlQ5g9X8JIHCqhoN0Hz7oD5r2G7V7PeCDgVJv8UnO89A5wpITq9w4hahLayk40DodZUhbZCgD00cJYDYJgT')
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', 'pk_test_51Q4kgtE7JEpDvfCUJuSA5RXIibRFFx0VHePxEftQvsNeKLP3sywZEBoByulhKur2bLahV5sWwK0JsBgjrwU8t6Zy00Dh2xIg3E')

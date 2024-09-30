@@ -26,6 +26,13 @@ urlpatterns = [
     path('search/', views.product_search, name='product_search'),
     # path('orders/', views.orders_view, name='orders'),  # URL for orders
     path('wishlist/', views.wishlist_view, name='wishlist'),  # URL for wishlist
+    path('create-payment-intent/', views.create_payment_intent, name='create-payment-intent'),
+    path('thank-you/', views.thank_you, name='thank-you'),
+     
+    # path('product_page', views.product_page, name='product_page'),
+    # path('payment_successful', views.payment_successful, name='payment_successful'),
+    # path('payment_cancelled', views.payment_cancelled, name='payment_cancelled'),
+    # path('stripe_webhook', views.stripe_webhook, name='stripe_webhook'),
 
     # Login authentication
     path('registration/', views.CustomerRegistrationView.as_view(), name="customerregistration"),

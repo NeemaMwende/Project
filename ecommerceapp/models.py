@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+#from . models import AppUser
 
 # Create your models here.
 CATEGORY_CHOICES=(
@@ -93,15 +96,15 @@ class Address(models.Model):
     def __str__(self):
         return f"{self.address_line}, {self.city}, {self.zip_code}" 
     
-# class Order(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     quantity = models.PositiveIntegerField(default=1)
-#     ordered_at = models.DateTimeField(auto_now_add=True)
-#     status = models.CharField(max_length=20, default='Pending')
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    ordered_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, default='Pending')
 
-#     def __str__(self):
-#         return f'Order #{self.id} by {self.user.username}'
+    def __str__(self):
+        return f'Order #{self.id} by {self.user.username}'
 
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -109,3 +112,14 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return f'{self.product.name} in {self.user.username}\'s Wishlist'
+    
+# class UserPayment(models.Model):
+#     app_user = models.ForeignKey(AppUser, on_delete=models.CASCADE)   
+#     payment_bool = models.BooleanField(default=False)
+#     stripe_checkout_id = models.CharField(max_length=500)
+     
+# @receiver(post_save, sender=AppUser)
+# def create_user_payment(sender, instance, created, **kwargs):
+#     if created:
+#         UserPayment.objects.create(app_user=instance)
+    
