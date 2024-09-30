@@ -237,7 +237,15 @@ def create_payment_intent(request):
 
 def product_search(request):
     query = request.GET.get('q')
-    products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query)) if query else Product.objects.all()
+    products = Product.objects.all()
+
+    if query:
+        # Convert query to lowercase and perform a case-insensitive search based on title and description
+        query = query.lower()
+        products = Product.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+
     return render(request, 'app/product_search_results.html', {'products': products, 'query': query})
 
 @login_required
