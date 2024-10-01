@@ -31,6 +31,10 @@ urlpatterns = [
     #path('product-search', views.product_search, name='product-search'),
     path('search/', views.product_search, name='product_search'),
      
+    #path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
+    path('success/', views.success, name='success'),
+    path('cancel/', views.cancel, name='cancel'),
+     
     # path('product_page', views.product_page, name='product_page'),
     # path('payment_successful', views.payment_successful, name='payment_successful'),
     # path('payment_cancelled', views.payment_cancelled, name='payment_cancelled'),

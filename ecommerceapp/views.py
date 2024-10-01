@@ -155,7 +155,50 @@ def calculate_cart_totals(user):
     quantity = cart[0].quantity if cart else 0
     return {'amount': amount, 'totalamount': totalamount, 'quantity': quantity}
 
-# Checkout View
+# def create_checkout_session(request):
+#     user = request.user
+#     address_id = request.POST.get('address')
+#     custom_address = request.POST.get('customAddress')
+
+#     # Handle address creation or selection
+#     if custom_address:
+#         address_parts = custom_address.split(',')
+#         address_line = address_parts[0].strip()
+#         city = address_parts[1].strip() if len(address_parts) > 1 else ''
+#         zip_code = address_parts[2].strip() if len(address_parts) > 2 else ''
+#         address = Address.objects.create(user=user, address_line=address_line, city=city, zip_code=zip_code)
+#     else:
+#         address = Address.objects.get(id=address_id)
+
+#     cart_items = Cart.objects.filter(user=user)
+#     line_items = []
+
+#     for item in cart_items:
+#         line_items.append({
+#             'price_data': {
+#                 'currency': 'usd',
+#                 'product_data': {
+#                     'name': item.product.title,
+#                 },
+#                 'unit_amount': int(item.product.discounted_price * 100),  # Stripe uses cents
+#             },
+#             'quantity': item.quantity,
+#         })
+
+#     YOUR_DOMAIN = 'http://localhost:8000'  # Replace with your domain in production
+
+#     try:
+#         checkout_session = stripe.checkout.Session.create(
+#             payment_method_types=['card'],
+#             line_items=line_items,
+#             mode='payment',
+#             success_url=YOUR_DOMAIN + '/success/',
+#             cancel_url=YOUR_DOMAIN + '/cancel/',
+#         )
+#         return redirect(checkout_session.url)
+#     except Exception as e:
+#         return render(request, 'error.html', {'error': str(e)})
+
 # Checkout View
 class Checkout(View):
     def get(self, request):
@@ -286,3 +329,39 @@ def contact(request):
     
 def thank_you(request):
     return render(request, 'app/thank_you.html')
+
+#Checkout session creation view
+# def create_checkout_session(request):
+#     YOUR_DOMAIN = 'http://localhost:8000'  # Replace with your domain
+
+#     try:
+#         # Create a new Stripe Checkout Session
+#         checkout_session = stripe.checkout.Session.create(
+#             payment_method_types=['card'],
+#             line_items=[
+#                 {
+#                     'price_data': {
+#                         'currency': 'usd',
+#                         'product_data': {
+#                             'name': 'Cool Product',
+#                         },
+#                         'unit_amount': 2000,  # 2000 cents = $20
+#                     },
+#                     'quantity': 1,
+#                 },
+#             ],
+#             mode='payment',
+#             success_url=YOUR_DOMAIN + '/success/',
+#             cancel_url=YOUR_DOMAIN + '/cancel/',
+#         )
+#         return redirect(checkout_session.url)
+#     except Exception as e:
+#         return render(request, 'error.html', {'error': str(e)})
+
+# Success page view
+def success(request):
+    return render(request, 'success.html')
+
+# Cancel page view
+def cancel(request):
+    return render(request, 'cancel.html')
