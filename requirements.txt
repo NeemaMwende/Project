@@ -12,3 +12,4 @@ soupsieve==2.6
 sqlparse==0.5.1
 typing_extensions==4.12.2
 whitenoise==6.7.0
+stripe
