@@ -37,7 +37,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'project-3-0d96.onrender.com',
+    'project-6-f9hu.onrender.com',
     'project-4-r6l3.onrender.com',
     # You can add more domains if needed
 ]
