@@ -38,7 +38,9 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'project-6-f9hu.onrender.com',
-    'project-4-r6l3.onrender.com',
+    '.onrender.com',
+    
+    #'project-4-r6l3.onrender.com',
     # You can add more domains if needed
 ]
 
